@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Spring5 MVC Hibernate Demo</title>
+    <style type="text/css">
+        .error {
+            color: red;
+        }
+        table {
+            width: 50%;
+            border-collapse: collapse;
+            border-spacing: 0px;
+        }
+        table td {
+            border: 1px solid #565454;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+<h1>Input Form</h1>
+<form action="addUser" method="post" th:object="${user}">
+    <table>
+        <tr>
+            <td>Name</td>
+            <td>
+                <input type="text" th:field="*{name}" /><br />
+                <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="error"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td>
+                <input type="text" th:field="*{email}" /><br />
+                <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error"></span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2"><button type="submit">Submit</button></td>
+        </tr>
+    </table>
+</form>
+
+<h2>Users List</h2>
+<table>
+    <tr>
+        <td><strong>Name</strong></td>
+        <td><strong>Email</strong></td>
+    </tr>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.name}"></td>
+        <td th:text="${user.email}"></td>
+    </tr>
+</table>
+</body>
+</html>
